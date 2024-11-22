@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fsm"
+authors = [ {name = "Paolo Bignardi", email = "paolo.bigno@gmail.com"} ]
+description = "Fuzzily create and manage Tmux sessions for projects and SSH connections"
+version = "0.0.1"
+readme = "README.md"
+requires-python=">=3.11"
+dependencies = [
+    "typer",
+    "libtmux"
+]
+
+[project.scripts]
+fsm = "fsm.main:app"
