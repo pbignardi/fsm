@@ -174,9 +174,9 @@ def main(
                 c.socket_path = socket_path
             else:
                 print_warning(f"Socket path {socket_path} not found. Ignoring")
-        if attach:
+        if attach is not None:
             c.attach_after_create = attach
-        if confirm_kill:
+        if confirm_kill is not None:
             c.confirm_kill = confirm_kill
 
 
