@@ -40,7 +40,8 @@ class Config:
     def __init__(self):
         file = Path(CONFIG_FILE).expanduser()
         if not file.exists():
-            return
+            with open(file, "w") as f:
+                f.write("{}")
 
         with open(file, "r") as f:
             config_dict = loads(f.read())
