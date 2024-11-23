@@ -23,9 +23,9 @@ config_app = Typer(
 
 class Config:
     # top-level directories to include in the search
-    include: set[str] = {"~"}
+    include: list[str] = ["~"]
     # path of directories to exclode from the search
-    exclude: set[str] = set()
+    exclude: list[str] = []
     # max depth to go into for the search
     max_depth: int = 1
     # default server socket_path
@@ -105,7 +105,8 @@ def add(path: Annotated[str, Argument(help="Path to include in search")]):
     """
     with Config() as c:
         if Path(path).expanduser().exists():
-            c.include.add(path)
+            if path not in c.include:
+                c.include.append(path)
         else:
             print_warning(f"{path} does not exists. Ignoring")
 
@@ -119,7 +120,8 @@ def rm(path: Annotated[str, Argument(help="Path to remove from search")]):
     """
     with Config() as c:
         if Path(path).expanduser().exists():
-            c.include.remove(path)
+            if path in c.include:
+                c.include.remove(path)
         else:
             print_warning(f"{path} does not exists. Ignoring")
 
